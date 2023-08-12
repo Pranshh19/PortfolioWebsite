@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+
+<link rel="stylesheet" href="css/login.css">
+<section class="auth-section">
+    <div class="auth-container">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <button type="button" id="popupButton">Guest</button>
+        </form>
+        <p>Don't have an account? <a href="/register">Register</a></p>
+       
+    </div>
+    
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popupButton = document.getElementById('popupButton');
+
+        popupButton.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Welcome Guest!',
+                text:  'ID: guest@gmail.com   PWD: 1234',
+                icon: 'info',
+                confirmButtonText: 'Got it!'
+            });
+        });
+    });
+</script>
+
+
