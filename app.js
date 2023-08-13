@@ -7,7 +7,8 @@ const User = require('./models/User');
 const databasconnect = require('./config/databaseConfig');
 var session = require('express-session')
 var Project = require('./models/Project'); 
-
+var Contact = require('./models/Contact'); 
+const isAdmin = require('./middleware/IsAdmin');
 databasconnect();
 
 app.set('view engine', 'ejs');
@@ -48,7 +49,7 @@ app.post('/login', async (req, res) => {
         if (user && await bcrypt.compare(password, user.password)) {
              // Assuming successful login
         req.session.loggedIn = true;
-        req.session.user = { email: email }; // Store user data as needed
+        req.session.user = { email: email, role: user.role }; // Store user data as needed
 
             res.redirect('/hero'); // Change the route accordingly
         } else {
@@ -84,7 +85,8 @@ app.post('/register', async (req, res) => {
             firstName,
             lastName,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            role: 'user'
         });
 
         
@@ -112,6 +114,13 @@ app.get('/hero', (req, res) => {
     res.render('hero');
 });
 
+app.use((req, res, next) => {
+    res.locals.flashMessage = req.session.flashMessage || ''; // Include flashMessage
+    delete req.session.flashMessage; // Clear flashMessage after displaying
+    next();
+});
+
+
 // Projects route
 app.get('/projects',async (req, res) => {
     try {
@@ -123,7 +132,7 @@ app.get('/projects',async (req, res) => {
     }
 });
 
-app.post('/add-project', async (req, res) => {
+app.post('/add-project',isAdmin, async (req, res) => {
     const { projectName, projectDescription, websiteLink } = req.body;
 
     try {
@@ -146,15 +155,64 @@ app.post('/add-project', async (req, res) => {
 });
 
 
+// app.js
+app.get('/projects/:id/delete',isAdmin, async (req, res) => {
+    const projectId = req.params.id;
 
-// Add Project route
-app.get('/add-project', (req, res) => {
-    res.render('addProject');
+    try {
+        // Find the project by its _id and delete it
+        await Project.findByIdAndDelete(projectId);
+
+        // Redirect the user back to the projects page
+        res.redirect('/projects');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/projects?error=Failed to delete project'); // Redirect back to projects page with error
+    }
 });
 
 
+// Add Project route
+app.get('/add-project',isAdmin, (req, res) => {
+    res.render('addProject');
+});
+
+app.get('/Contact',async (req, res) => {
+    res.render('Contact');
+});
+
+app.post('/Contact', async (req, res) => {
+    const { name, email, contact} = req.body;
+    try {
+        // Create a new user with contact details
+        const contacti = new Contact({
+            name,
+            email,
+            contact,
+        });
+
+        
+        await contacti.save();
+
+        // Redirect to the login page or dashboard
+        res.redirect('/Thanks'); // Change the route accordingly
+    } catch (error) {
+        console.error(error);
+        res.send("Can't submit form as of now, Try Again Later!!");
+    }
+
+})
+
 app.get('/Aboutme', (req, res) => {
     res.render('Aboutme');
+})
+
+app.get('/Thanks', (req, res) => {
+    res.render("Thanks", {layout:false});
+})
+
+app.get("/Oops", (req, res) => {
+    res.render('Oops')
 })
 
 app.listen(PORT, () => {

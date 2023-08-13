@@ -1,7 +1,25 @@
 <!-- Include your header and other common components -->
 
-<link rel="stylesheet" href="css/project.css">
 
+
+<link rel="stylesheet" href="css/project.css">
+<style>
+    .project-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns in each row */
+        grid-gap: 20px; /* Spacing between cards */
+    }
+    
+    .project-card {
+        border: 0.5px solid #ccc;
+        padding: 30px;
+        width:500px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+    }
+    
+</style>
 <div class="projects-container">
     <h2>Projects</h2>
 
@@ -13,17 +31,27 @@
         <button type="submit">Add Project</button>
     </form>
 
-    <!-- Display existing projects -->
+    <!-- if user is not admin then flash the message that it's not acceptable action  -->
+
+    <% if (flashMessage) { %>
+        <div class="flash-message">
+            <%= flashMessage %>
+        </div>
+    <% } %>
+
+        <!-- Display existing projects -->
+
     <div class="project-list">
         <% projects.forEach(project => { %>
             <div class="project-card">
                 <h3><%= project.projectName %></h3>
                 <p><%= project.projectDescription %></p>
-                <a href="<%= project.websiteLink %>" target="_blank">Visit Website</a>
-                <!-- Add buttons for "Show Project" and "Show Source Code" -->
+                <a href="<%= project.websiteLink %>" target="_blank" class="button" style="color:aliceblue">Visit Website</a>
+                <a href="/projects/<%= project._id %>/delete" class="delete-button" style="color:aliceblue">Delete</a>
             </div>
-        <% }); %>
+        <% }) %>
     </div>
+
 </div>
 
 <!-- Include your footer and other common components -->

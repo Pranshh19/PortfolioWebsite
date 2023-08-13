@@ -1,0 +1,10 @@
+<div class="project-list">
+    <% projects.forEach(project => { %>
+        <div class="project-card">
+            <h3><%= project.projectName %></h3>
+            <p><%= project.projectDescription %></p>
+            <a href="<%= project.websiteLink %>" target="_blank" class="button" style="color:aliceblue">Visit Website</a>
+            <a href="/projects/<%= project._id %>/delete" class="delete-button" style="color:aliceblue">Delete</a>
+        </div>
+    <% }) %>
+</div>

@@ -1,4 +1,17 @@
 /* Header */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    flex: 1;
+}
 
 .header {
     background-color: #fff; /* White background color */
@@ -30,11 +43,11 @@
     
 
 .footer {
-    background-color: #000; /* Black background color */
-    color: #fff; /* Text color */
-    padding: 20px 0; /* Add some spacing */
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
