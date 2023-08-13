@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const User = require('./models/User');
 const databasconnect = require('./config/databaseConfig');
 var session = require('express-session')
+var Project = require('./models/Project'); 
 
 databasconnect();
 
@@ -112,9 +113,39 @@ app.get('/hero', (req, res) => {
 });
 
 // Projects route
-app.get('/projects', (req, res) => {
-    res.render('projects');
+app.get('/projects',async (req, res) => {
+    try {
+        const projects = await Project.find(); // Fetch projects from the database
+        res.render('projects', { projects }); // Pass the projects data to the template
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
+app.post('/add-project', async (req, res) => {
+    const { projectName, projectDescription, websiteLink } = req.body;
+
+    try {
+        // Create a new instance of the Project model
+        const project = new Project({
+            projectName,
+            projectDescription,
+            websiteLink
+        });
+
+        // Save the project to the database
+        await project.save();
+
+        // Redirect the user back to the projects page or wherever you want
+        res.redirect('/projects');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/projects?error=Failed to add project'); // Redirect back to projects page with error
+    }
+});
+
+
 
 // Add Project route
 app.get('/add-project', (req, res) => {
