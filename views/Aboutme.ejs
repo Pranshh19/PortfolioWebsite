@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="css/aboutme.css">
+
+<style>
+    /* Style the popup container */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Style the popup content */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Rest of your CSS for popup styling */
+
+</style>
+
+<div class="about-me-section">
+    <div class="about-big-card">
+        <img src="big-card-image.jpg" alt="Big Card Image">
+        <div class="card-details">
+            <h3>About Me</h3>
+            <p>Here's a brief overview of who I am and what I do...</p>
+            <a href="#" class="view-details-button"  id="view-details-about">View Details</a>
+        </div>
+    </div>
+    <div class="about-small-cards">
+        <div class="about-small-card" id="card-skills">
+            <img src="small-card1-image.jpg" alt="Small Card 1 Image">
+            <div class="card-details">
+                <h3>Skills</h3>
+                <p>Here are some of my key skills and areas of expertise...</p>
+                <a href="#" class="view-details-button" data-popup-content="Details about skills">View Details</a>
+            </div>
+        </div>
+        <div class="about-small-card"  id="card-experience">
+            <img src="small-card2-image.jpg" alt="Small Card 2 Image">
+            <div class="card-details">
+                <h3>Experience</h3>
+                <p>Take a look at my professional journey and experiences...</p>
+                <a href="#" class="view-details-button" data-popup-content="Details about experience">View Details</a>
+            </div>
+        </div>
+        <div class="about-small-card">
+            <img src="small-card2-image.jpg" alt="Small Card 2 Image">
+            <div class="card-details">
+                <h3>Experience</h3>
+                <p>Take a look at my professional journey and experiences...</p>
+                <a href="#" class="view-details-button">View Details</a>
+            </div>
+        </div>
+
+
+        <!-- Add more small cards as needed -->
+    </div>
+</div>
+
+<div class="popup-container" id="popup-container">
+    <div class="popup-content">
+        <h3 id="popup-title">Details</h3>
+        <p id="popup-text">This is the detailed information about the section...</p>
+        <button id="close-popup">Close</button>
+    </div>
+</div>
+
+
+<script>
+    const popupContainer = document.getElementById("popup-container");
+    const popupTitle = document.getElementById("popup-title");
+    const popupText = document.getElementById("popup-text");
+    const closePopupButton = document.getElementById("close-popup");
+
+    // Add event listeners to each "View Details" button
+    document.getElementById("view-details-about").addEventListener("click", () => {
+        popupTitle.textContent = "About Me";
+        popupText.textContent = " ";
+        popupContainer.style.display = "block";
+    });
+
+    document.getElementById("card-skills").addEventListener("click", () => {
+        popupTitle.textContent = "Skills";
+        popupText.textContent = "Here are some of my key skills and areas of expertise...\nHTML, CSS, JavaScript, Node.js, etc.";
+        popupContainer.style.display = "block";
+    });
+
+    document.getElementById("card-experience").addEventListener("click", () => {
+        popupTitle.textContent = "Experience";
+        popupText.textContent = "Take a look at my professional journey and experiences...\nPrevious job positions, projects, etc.";
+        popupContainer.style.display = "block";
+    });
+
+    closePopupButton.addEventListener("click", () => {
+        popupContainer.style.display = "none";
+    });
+</script>

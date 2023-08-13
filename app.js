@@ -121,6 +121,11 @@ app.get('/add-project', (req, res) => {
     res.render('addProject');
 });
 
+
+app.get('/Aboutme', (req, res) => {
+    res.render('Aboutme');
+})
+
 app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`);
 });

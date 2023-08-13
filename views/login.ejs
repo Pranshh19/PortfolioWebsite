@@ -1,6 +1,113 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
 
+<style>
+    .flash-message {
+        position: fixed;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 10px;
+        transition: bottom 0.5s ease-in-out;
+    }
+
+/* Pop up Message Design*/
+
+body, h1, h2, h3, p, button {
+    margin: 0;
+    padding: 0;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#ok-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#ok-button:hover {
+    background-color: #0056b3;
+}
+
+        
+    
+</style>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <p>If you don't want to register then<br> Click on guest button to get the login Credentials.</p>
+        <button id="ok-button">OK</button>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById("overlay");
+    const popup = document.getElementById("popup");
+    const okButton = document.getElementById("ok-button");
+    
+    okButton.addEventListener("click", () => {
+        popup.style.display = "none";
+        overlay.style.display = "none"; // Hide the overlay
+        document.body.style.overflow = "auto"; // Restore scrolling
+    });
+    
+    setTimeout(() => {
+        popup.style.display = "block";
+        overlay.style.display = "block"; // Display the overlay
+        document.body.style.overflow = "hidden"; // Disable scrolling
+    }, 1000);
+
+</script>
+
+
+
 <link rel="stylesheet" href="css/login.css">
 <section class="auth-section">
     <div class="auth-container">
@@ -14,8 +121,12 @@
         <p>Don't have an account? <a href="/register">Register</a></p>
        
     </div>
-    
 </section>
+
+<div class="flash-message" id="flash-message">
+    The website is still under construction, Thanks
+</div>
+
 
 
 <script>
@@ -31,6 +142,23 @@
             });
         });
     });
+
+      // Get the flash message element
+      const flashMessage = document.getElementById("flash-message");
+
+      // Function to start the sliding animation
+      function startSliding() {
+          // Slide the flash message up
+          flashMessage.style.bottom = "0";
+  
+          // Set a timeout to slide it back down after a few seconds
+          setTimeout(() => {
+              flashMessage.style.bottom = "-90px"; // Hide the message
+          }, 6000); // Set the time in milliseconds (e.g., 5000ms = 5 seconds)
+      }
+  
+      // Start the sliding animation when the page loads
+      window.onload = startSliding;
 </script>
 
 
