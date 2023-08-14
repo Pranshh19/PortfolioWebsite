@@ -9,6 +9,7 @@ var session = require('express-session')
 var Project = require('./models/Project'); 
 var Contact = require('./models/Contact'); 
 const isAdmin = require('./middleware/IsAdmin');
+const Skill = require('./models/Skills');
 databasconnect();
 
 app.set('view engine', 'ejs');
@@ -26,6 +27,7 @@ app.use(session({
 }));
 app.use((req, res, next) => {
     res.locals.loggedIn = req.session.loggedIn || false;
+    res.locals.user = req.session.user || {}; // Provide an empty object if not logged in
     next();
 });
 
@@ -202,6 +204,54 @@ app.post('/Contact', async (req, res) => {
     }
 
 })
+
+app.get('/skills', async (req, res) => {
+    try {
+        const skills = await Skill.find(); // Fetch skills from the database
+        res.render('skills', { skills, loggedIn: req.session.loggedIn, user: req.session.user }); // Pass the skills data to the template
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get('/add-skill', isAdmin, (req, res) => {
+    res.render('addSkill');
+});
+
+app.post('/add-skill', isAdmin, async (req, res) => {
+    const { name,icon } = req.body;
+
+    try {
+        const skill = new Skill({
+            name,
+            icon
+        });
+        await skill.save();
+
+        // Redirect back to the skills page or wherever you want
+        res.redirect('/skills');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/skills?error=Failed to add skill');
+    }
+});
+
+app.get('/skills/:id/delete', isAdmin, async (req, res) => {
+    const skillId = req.params.id;
+
+    try {
+        // Find the skill by its _id and delete it
+        await Skill.findByIdAndDelete(skillId);
+
+        // Redirect the user back to the skills page
+        res.redirect('/skills');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/skills?error=Failed to delete skill'); // Redirect back to skills page with error
+    }
+});
+
 
 app.get('/Aboutme', (req, res) => {
     res.render('Aboutme');

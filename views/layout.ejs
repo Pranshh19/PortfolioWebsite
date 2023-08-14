@@ -14,6 +14,10 @@
                     <a href="/skills">Skills</a>
                     <a href="/Aboutme">About me</a>
                     <a href="/contact">Contact</a>
+                    <% if (loggedIn && user.role === 'admin') { %>
+                        <a href="/add-skill">Add Skill</a>
+                        <a href="/add-project">Add Project</a>
+                      <% } %>
                 </div>
                 <div class="header-right">
                     <% if (loggedIn) { %>
@@ -47,3 +51,8 @@
     </footer>
 </body>
 </html>
+
+
+
+
+

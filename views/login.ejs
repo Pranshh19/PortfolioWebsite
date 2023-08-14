@@ -82,8 +82,8 @@ body, h1, h2, h3, p, button {
 
 <div class="popup" id="popup">
     <div class="popup-content">
-        <p>If you don't want to register then<br> Click on guest button to get the login Credentials.</p>
-        <button id="ok-button">OK</button>
+        <p>If you don't want to register then<br>Please click on the guest button to continue to My Portfolio website</p>
+        <button id="ok-button">Ok! Happy Viewing</button>
     </div>
 </div>
 
@@ -116,7 +116,7 @@ body, h1, h2, h3, p, button {
             <input type="email" name="email" id="email" placeholder="Email" required>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <button type="submit">Login</button>
-            <button type="button" id="popupButton">Guest</button>
+            <button type="button" id="guest-login">Guest</button>
         </form>
         <p>Don't have an account? <a href="/register">Register</a></p>
        
@@ -130,19 +130,6 @@ body, h1, h2, h3, p, button {
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const popupButton = document.getElementById('popupButton');
-
-        popupButton.addEventListener('click', () => {
-            Swal.fire({
-                title: 'Welcome Guest!',
-                text:  'ID: guest@gmail.com   PWD: 1234',
-                icon: 'info',
-                confirmButtonText: 'Got it!'
-            });
-        });
-    });
-
       // Get the flash message element
       const flashMessage = document.getElementById("flash-message");
 
@@ -161,4 +148,19 @@ body, h1, h2, h3, p, button {
       window.onload = startSliding;
 </script>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const guestButton = document.getElementById('guest-login');
+        const emailField = document.getElementById('email');
+        const passwordField = document.getElementById('password');
+
+        guestButton.addEventListener('click', function() {
+            emailField.value = 'guest@gmail.com'; // Set the guest email
+            passwordField.value = '1234'; // Set the guest password
+            // Automatically submit the form
+            document.querySelector('form').submit();
+        });
+    });
+</script>
 

@@ -11,10 +11,10 @@
     }
     
     .project-card {
-        border: 0.5px solid #ccc;
+        border: 1px solid #ffffff;
         padding: 30px;
         width:500px;
-        background-color: #fff;
+        background-color: #f8f8f8;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border-radius: 50px;
     }
@@ -24,12 +24,6 @@
     <h2>Projects</h2>
 
     <!-- Form for adding projects -->
-    <form action="/add-project" method="post" class="add-project-form">
-        <input type="text" name="projectName" placeholder="Project Name" required>
-        <input type="text" name="projectDescription" placeholder="Project Description" required>
-        <input type="text" name="websiteLink" placeholder="Website Link" required>
-        <button type="submit">Add Project</button>
-    </form>
 
     <!-- if user is not admin then flash the message that it's not acceptable action  -->
 
@@ -47,7 +41,11 @@
                 <h3><%= project.projectName %></h3>
                 <p><%= project.projectDescription %></p>
                 <a href="<%= project.websiteLink %>" target="_blank" class="button" style="color:aliceblue">Visit Website</a>
+                
+                <% if(loggedIn && user.role=='admin') { %>
+
                 <a href="/projects/<%= project._id %>/delete" class="delete-button" style="color:aliceblue">Delete</a>
+                <%}%>
             </div>
         <% }) %>
     </div>
