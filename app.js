@@ -11,7 +11,7 @@ var Contact = require('./models/Contact');
 const isAdmin = require('./middleware/IsAdmin');
 const Skill = require('./models/Skills');
 const axios = require('axios');
-const Blog = require("./models/blog");
+const Blog = require("./models/Blog");
 
 databasconnect();
 
