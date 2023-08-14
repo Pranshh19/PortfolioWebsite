@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags, title, and stylesheets -->
+</head>
+<body>
+    <div class="container">
+        <h2>Add Blog</h2>
+        <form action="/add-blog" method="POST">
+            <label for="name">Blog Name:</label>
+            <input type="text" name="name" required>
+            <label for="image">Blog Image</label>
+            <input type="url" name="image" required>
+            <label for="blogDescription">Description:</label>
+            <textarea name="blogDescription" rows="3" required></textarea>
+            <label for="blogContent">Blog Content:</label>
+            <textarea name="blogContent" rows="10" required></textarea>
+            <button type="submit">Add Blog</button>
+        </form>
+    </div>
+    <!-- Footer, scripts, and other content -->
+</body>
+</html>

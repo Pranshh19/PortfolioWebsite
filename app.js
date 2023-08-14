@@ -10,6 +10,9 @@ var Project = require('./models/Project');
 var Contact = require('./models/Contact'); 
 const isAdmin = require('./middleware/IsAdmin');
 const Skill = require('./models/Skills');
+const axios = require('axios');
+const Blog = require("./models/blog");
+
 databasconnect();
 
 app.set('view engine', 'ejs');
@@ -252,6 +255,114 @@ app.get('/skills/:id/delete', isAdmin, async (req, res) => {
     }
 });
 
+const token = process.env.githubToken 
+
+app.get('/Github', async(req, res) => {
+    try {
+        const response = await axios.get('https://api.github.com/user/repos', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const repositories = response.data;
+        res.render('github', { repositories });
+    } catch (error) {
+        // console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+
+})
+
+
+// Display all blogs
+app.get("/blog", async (req, res) => {
+    try {
+      const blogs = await Blog.find();
+      res.render("blogList", { blogs });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+});
+
+// Display add blog form (for admin)
+app.get("/add-blog", (req, res) => {
+    // Implement authentication and authorization logic here
+    res.render("addBlogForm");
+});
+  
+// Handle add blog form submission (for admin)
+app.post("/add-blog", async (req, res) => {
+    // Implement authentication and authorization logic here
+    try {
+      const { name,image, blogDescription, blogContent } = req.body;
+      const newBlog = new Blog({
+          name,
+          image,
+        blogDescription,
+        blogContent,
+      });
+      await newBlog.save();
+      res.redirect("/blog");
+    } catch (error) {
+      console.error(error);
+      res.redirect("/blog?error=Failed to add blog");
+    }
+  });
+
+
+// Define the route to view an individual blog
+app.get('/blogs/:id', async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id); // Assuming you have a model named Blog
+        const relatedBlogs = await Blog.find({ _id: { $ne: req.params.id } }).limit(4);
+        if (!blog) {
+            return res.status(404).send('Blog not found');
+        }
+        
+        res.render('blogView', {layout:false, blog, relatedBlogs }); // Render the blogView.ejs template
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.get("/blogs/:id/edit", async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id);
+        res.render("edit-blog", { blog });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// POST route to handle the form submission and update the blog
+app.post("/blogs/:id/edit", async (req, res) => {
+    try {
+        const { name,image, blogDescription, blogContent } = req.body;
+        await Blog.findByIdAndUpdate(req.params.id, {
+            name,
+            image,
+            blogDescription,
+            blogContent,
+        });
+        res.redirect("/blog"); // Redirect to the blog list page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+app.post("/blogs/:id/delete", async (req, res) => {
+    try {
+        await Blog.findByIdAndDelete(req.params.id);
+        res.redirect("/blog"); // Redirect to the blog list
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 app.get('/Aboutme', (req, res) => {
     res.render('Aboutme');

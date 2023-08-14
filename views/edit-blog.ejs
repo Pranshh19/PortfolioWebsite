@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog</title>
+    <!-- Include normalize.css or reset.css here to ensure consistent rendering -->
+    <link rel="stylesheet" href="/path/to/normalize.css"> <!-- Example path, adjust as needed -->
+    <style>
+        /* Scoped styles for the editBlog.ejs template */
+        .edit-blog-container {
+            max-width: 1200px;
+            width:800px;
+            margin: 0 auto;
+            padding: 60px;
+            box-sizing: border-box;
+        }
+
+        .edit-blog-form {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .edit-blog-form-group {
+            margin-bottom: 15px;
+        }
+
+        .edit-blog-label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .edit-blog-input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .edit-blog-button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-blog-button:hover {
+            background-color: #222;
+        }
+
+        /* Reset or normalize styles to ensure consistent rendering */
+        /* Include normalize.css or reset.css here */
+    </style>
+</head>
+<body>
+    <div class="edit-blog-container">
+        <h2>Edit Blog</h2>
+        <form class="edit-blog-form" action="/blogs/<%= blog._id %>/edit" method="POST">
+            <!-- Edit input fields to update blog properties -->
+            <div class="edit-blog-form-group">
+                <label class="edit-blog-label" for="name">Blog Name:</label>
+                <input class="edit-blog-input" type="text" id="name" name="name" value="<%= blog.name %>" required>
+            </div>
+            <div class="edit-blog-form-group">
+                <label class="edit-blog-label" for="name">Blog Image:</label>
+                <input class="edit-blog-input" type="text" id="image" name="image" value="<%= blog.image %>" required>
+            </div>
+            <div class="edit-blog-form-group">
+                <label class="edit-blog-label" for="blogDescription">Blog Description:</label>
+                <input class="edit-blog-input" type="text" id="blogDescription" name="blogDescription" value="<%= blog.blogDescription %>" required>
+            </div>
+            <div class="edit-blog-form-group">
+                <label class="edit-blog-label" for="blogContent">Blog Content:</label>
+                <textarea class="edit-blog-input" id="blogContent" name="blogContent" rows="8" required><%= blog.blogContent %></textarea>
+            </div>
+            <button class="edit-blog-button" type="submit">Update Blog</button>
+        </form>
+    </div>
+    <!-- Footer, scripts, and other content -->
+</body>
+</html>

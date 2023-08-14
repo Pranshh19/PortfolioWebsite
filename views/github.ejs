@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My GitHub Repositories</title>
+    <style> 
+        body {
+            overflow: hidden; /* Hide the scrollbar for the main page */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .repository-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px; /* Set a maximum height for the list */
+            overflow-y: auto; /* Add a vertical scrollbar if necessary */
+        }
+        .repository-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .repository-item:hover {
+            transform: translateY(-5px);
+        }
+        h3 {
+            font-size: 24px;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+        p {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>My GitHub Repositories</h2>
+        <ul class="repository-list">
+            <% repositories.forEach(repo => { %>
+                <li class="repository-item">
+                    <h3><%= repo.name %></h3>
+                    <p><%= repo.description %></p>
+                    <p>Language: <%= repo.language %></p>
+                    <p>Stars: <%= repo.stargazers_count %></p>
+                    <a href="<%= repo.html_url %>" target="_blank">View on GitHub</a>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</body>
+</html>

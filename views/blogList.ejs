@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* blogList.css */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .blog-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Display 3 cards per row */
+            gap: 20px;
+        }
+
+        .blog-list li {
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 10px;
+            text-align: center;
+            list-style: none;
+            position: relative; /* Make the li relatively positioned */
+        }
+
+        .blog-list img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-list h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .blog-list p {
+            font-size: 14px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .blog-list a {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .view-link:hover,
+        .edit-link:hover,
+        .delete-link:hover {
+            background-color: #222;
+        }
+
+        .view-link {
+            background-color: #3754aa;
+        }
+
+        .edit-link {
+            background-color: #ffac33;
+        }
+
+        .delete-link {
+            background-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Blog List</h2>
+        <ul class="blog-list">
+            <% blogs.forEach(blog => { %>
+                <li>
+                    <img src="<%=blog.image%>">
+                    <h3><%= blog.name %></h3>
+                    <p><%= blog.blogDescription %></p>
+                    <div class="button-container">
+                        <a href="/blogs/<%= blog._id %>" class="view-link">View</a>
+                        <% if (loggedIn && user.role === 'admin') { %>
+                            <a href="/blogs/<%= blog._id %>/edit" class="edit-link">Edit</a>
+                            <form action="/blogs/<%= blog._id %>/delete" method="POST">
+                                <button type="submit" class="delete-link">Delete</button>
+                            </form>
+                        <% } %>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+    <!-- Footer, scripts, and other content -->
+</body>
+</html>
