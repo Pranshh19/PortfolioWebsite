@@ -208,7 +208,7 @@ app.post('/Contact', async (req, res) => {
 app.get('/skills', async (req, res) => {
     try {
         const skills = await Skill.find(); // Fetch skills from the database
-        res.render('skills', { skills, loggedIn: req.session.loggedIn, user: req.session.user }); // Pass the skills data to the template
+        res.render('Skills', { skills, loggedIn: req.session.loggedIn, user: req.session.user }); // Pass the skills data to the template
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
