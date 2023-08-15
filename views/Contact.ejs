@@ -15,13 +15,12 @@ body, h1, form {
 /* Center the content vertically and horizontally */
 .main-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
     min-height: 80vh;
     background-color: #ffffff;
     width: 450px;
 }
-
 .contact-form {
     background-color: rgb(243, 243, 243);
     padding: 30px;
@@ -79,6 +78,17 @@ button {
 button:hover {
     background-color: #252525;
 }
+.input-container {
+    display: flex;
+    gap: 20px;
+}
+.email-message {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+
 
     </style>
 </head>
@@ -103,5 +113,15 @@ button:hover {
             </form>
         </div>
     </div>
+    <div class="email-message">
+        <div style="margin-bottom: 10px;">
+            Mail me at:
+        </div>
+        <div>
+            pranshuadhwaryu19@gmail.com
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

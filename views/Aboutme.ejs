@@ -1,108 +1,141 @@
-<link rel="stylesheet" href="css/aboutme.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Me</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-    /* Style the popup container */
-.popup-container {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
+        section {
+            padding: 40px;
+        }
 
-/* Style the popup content */
-.popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+        h1, h2, h3 {
+            margin: 0;
+        }
 
-/* Rest of your CSS for popup styling */
+        .subsection {
+            margin-top: 20px;
+        }
 
-</style>
+        .title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
 
-<div class="about-me-section">
-    <div class="about-big-card">
-        <img src="big-card-image.jpg" alt="Big Card Image">
-        <div class="card-details">
-            <h3>About Me</h3>
-            <p>Here's a brief overview of who I am and what I do...</p>
-            <a href="#" class="view-details-button"  id="view-details-about">View Details</a>
+        .duration, .location, .details {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .details {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        ul {
+            margin-top: 10px;
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- About Me Section -->
+    <section style="background-color: #f5f5f5;">
+        <h1>About Me</h1>
+        <p>Hey, I'm Pranshu Adhwaryu. I'm aspiring to be a Software developer & Engineer.  Welcome to my personal corner of the internet!</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section style="background-color: #ffffff;">
+        <h2>Skills</h2>
+        <ul>
+            <li>Experienced: C, C++</li>
+            <li>Intermediate: HTML, CSS, JavaScript, Node.js, git, github, postman, MySQl, MongoDB</li>
+            <li>Familiar: React, Java, Python</li>
+        </ul>
+    </section>
+
+    <!-- Experience Section -->
+    <section style="background-color: #f5f5f5;">
+        <h2>Experience</h2>
+        
+        <!-- Persistent Systems | Martian Intern -->
+        <div class="subsection">
+            <h3>Persistent Systems | Martian Intern</h3>
+            <p class="role">June 2023 - Aug 2023 | Bhopal, BPL</p>
+            <p>Worked on DBMS(MySQL), Core Java, Linux OS along with learning key concepts of Data Structure and Algorithms</p>
         </div>
-    </div>
-    <div class="about-small-cards">
-        <div class="about-small-card" id="card-skills">
-            <img src="small-card1-image.jpg" alt="Small Card 1 Image">
-            <div class="card-details">
-                <h3>Skills</h3>
-                <p>Here are some of my key skills and areas of expertise...</p>
-                <a href="#" class="view-details-button" data-popup-content="Details about skills">View Details</a>
-            </div>
+        
+        <!-- PW SKILLS | Training & Certification -->
+        <div class="subsection">
+            <h3>PW SKILLS | Training & Certification</h3>
+            <p class="duration">Jan 2023 – Aug 2023</p>
+            <ul>
+                <li>Extensive experience in the MERN (MongoDB, Express.js, React.js, Node.js) Stack</li>
+                <li>Successfully developed and delivered over 20 projects</li>
+                <li>Hands-on utilization of HTML, CSS, JavaScript, React.js, and Node.js</li>
+                <li>Proficiency across the entire software stack</li>
+            </ul>
         </div>
-        <div class="about-small-card"  id="card-experience">
-            <img src="small-card2-image.jpg" alt="Small Card 2 Image">
-            <div class="card-details">
-                <h3>Experience</h3>
-                <p>Take a look at my professional journey and experiences...</p>
-                <a href="#" class="view-details-button" data-popup-content="Details about experience">View Details</a>
-            </div>
+    </section>
+
+    <!-- Position of Responsibility Section -->
+    <section style="background-color: #ffffff;">
+        <h2>Position of Responsibility</h2>
+        
+        <!-- Mentor in Startup Cell -->
+        <div class="subsection">
+            <h3>Startup Cell MITS</h3>
+            <p class="role">Mentor</p>
+            <p class="duration">Sep 2022 - Present · 1 yr</p>
+            <p class="location">Gwalior, Madhya Pradesh, India</p>
+            <p class="details">Skills: Leadership · Marketing · Management · Team Management · Public Speaking · Strategy</p>
         </div>
-        <div class="about-small-card">
-            <img src="small-card2-image.jpg" alt="Small Card 2 Image">
-            <div class="card-details">
-                <h3>Experience</h3>
-                <p>Take a look at my professional journey and experiences...</p>
-                <a href="#" class="view-details-button">View Details</a>
-            </div>
+        
+        <!-- Coordinator in Startup Cell -->
+        <div class="subsection">
+            <h3>Startup Cell MITS</h3>
+            <p class="role">Coordinator</p>
+            <p class="duration">Mar 2021 - Present · 2 yrs 6 mos</p>
+            <p class="location">Gwalior, Madhya Pradesh, India</p>
+            <p class="details">Skills: Leadership · Marketing · Management · Public Speaking · Strategy · Web Content Writing · Creative Writing · Social Media</p>
         </div>
+    </section>
 
+    <!-- Education Section -->
+    <section style="background-color: #f5f5f5;">
+        <h2>Education</h2>
+        
+        <!-- BTech -->
+        <div class="subsection">
+            <h3>Madhav Institute of Technology & Science Gwalior</h3>
+            <p class="title">Btech in Computer Science</p>
+            <p class="duration">Aug 2020 - May 2024 | Gwalior</p>
+            <p class="details">CGPA: 8.92</p>
+        </div>
+        
+        <!-- XII -->
+        <div class="subsection">
+            <h3>Mother Teresa Sen Sec Co-ed School</h3>
+            <p class="title">XII</p>
+            <p class="duration">May 2019</p>
+            <p class="details">Percentage: 89%</p>
+        </div>
+        
+        <!-- X -->
+        <div class="subsection">
+            <h3>Mother Teresa Sen Sec Co-ed School</h3>
+            <p class="title">X</p>
+            <p class="duration">May 2017</p>
+            <p class="details">Percentage: 95%</p>
+        </div>
+    </section>
 
-        <!-- Add more small cards as needed -->
-    </div>
-</div>
-
-<div class="popup-container" id="popup-container">
-    <div class="popup-content">
-        <h3 id="popup-title">Details</h3>
-        <p id="popup-text">This is the detailed information about the section...</p>
-        <button id="close-popup">Close</button>
-    </div>
-</div>
-
-
-<script>
-    const popupContainer = document.getElementById("popup-container");
-    const popupTitle = document.getElementById("popup-title");
-    const popupText = document.getElementById("popup-text");
-    const closePopupButton = document.getElementById("close-popup");
-
-    // Add event listeners to each "View Details" button
-    document.getElementById("view-details-about").addEventListener("click", () => {
-        popupTitle.textContent = "About Me";
-        popupText.textContent = " ";
-        popupContainer.style.display = "block";
-    });
-
-    document.getElementById("card-skills").addEventListener("click", () => {
-        popupTitle.textContent = "Skills";
-        popupText.textContent = "Here are some of my key skills and areas of expertise...\nHTML, CSS, JavaScript, Node.js, etc.";
-        popupContainer.style.display = "block";
-    });
-
-    document.getElementById("card-experience").addEventListener("click", () => {
-        popupTitle.textContent = "Experience";
-        popupText.textContent = "Take a look at my professional journey and experiences...\nPrevious job positions, projects, etc.";
-        popupContainer.style.display = "block";
-    });
-
-    closePopupButton.addEventListener("click", () => {
-        popupContainer.style.display = "none";
-    });
-</script>
+</body>
+</html>
